@@ -1,0 +1,46 @@
+<div id="app">
+  <label for="title">Check if the input is used in this project: </label>
+  <p><input v-model="input"></p>
+  <button @click=check(input)>Check</button>
+  <br>
+  <br>
+  <div @mouseenter="enter" @mouseleave="leave">Move mouse on me!</div>
+  <br>
+  <div class="a" @mouseenter="enter" @mouseleave="leave" v-show="seen">Howdy!</div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const app = {
+    delimiters: ["[[", "]]"],
+    data: function () {
+      return {
+        input: "",
+        seen: false
+      }
+    },
+    methods: {
+      check(input) {
+        if (input == "") {
+          alert("Input is required.")
+        } else {
+          included = "{{using}}".includes(input)
+
+          if (included) {
+            alert("Input is used.")
+          } else {
+            alert("Input is not used.")
+          }
+        }
+      },
+
+      enter() {
+        this.seen = true;
+      },
+      leave() {
+        this.seen = false;
+      }
+    }
+  }
+  Vue.createApp(app).mount('#app')
+</script>
