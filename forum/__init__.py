@@ -1,4 +1,5 @@
 from flask import Flask
+from .routes import index
 
 
 def create_app():
@@ -8,4 +9,5 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///forum.db'
 
+    app.register_blueprint(index.bp)
     return app
