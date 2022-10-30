@@ -19,7 +19,6 @@ def index():
             result_2 = int(date[8:])
 
         result = (result_0, result_1, result_2)
-        print(result)
         return result
 
     if request.method == 'POST':
