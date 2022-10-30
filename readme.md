@@ -10,7 +10,8 @@
     venv/bin/activate
 
 ### 2. Install dependencies
-    pip install -r requirements.txt
+    Windows: pip install -r requirements.txt
+    Mac: pip3 install -r requirements.txt
 
 ### 3. Run the server
     Windows: python app.py
