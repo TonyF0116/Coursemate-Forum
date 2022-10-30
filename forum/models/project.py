@@ -15,9 +15,10 @@ def create_project(title, group_leader, description,  project_start_date, projec
 
 
 # Using raw sql with sqlalchemy connection
-
-
-engine = create_engine("sqlite:///instance/forum_raw.db")
+def get():
+    with engine.connect() as connection:
+        result = connection.execute('SELECT * FROM Courses;').fetchone()
+    return result
 
 
 def get_all_projects_raw():
