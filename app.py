@@ -12,7 +12,7 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
 
-    # engine = create_engine("sqlite:///forum_raw.db")
+    # engine = create_engine("sqlite:///instance/forum_raw.db")
     # connection = engine.connect()
     # connection.execute('DROP TABLE IF EXISTS Project')
     # connection.execute('''CREATE TABLE Project (id INT PRIMARY KEY,
