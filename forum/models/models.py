@@ -11,8 +11,7 @@ class Student(db.Model):
     year = Column(Integer)
     preferred_work_time = Column(Integer)
 
-    def __init__(self, aid, displayed_name, first_name, last_name, major, year, preferred_work_time):
-        self.aid = aid
+    def __init__(self, displayed_name, first_name, last_name, major, year, preferred_work_time):
         self.displayed_name = displayed_name
         self.first_name = first_name
         self.last_name = last_name
@@ -38,8 +37,7 @@ class Course(db.Model):
     crn = Column(Integer)
     department = Column(String)
 
-    def __init__(self, cid, term_id, crn, department):
-        self.cid = cid
+    def __init__(self, term_id, crn, department):
         self.term_id = term_id
         self.crn = crn
         self.department = department
@@ -66,8 +64,7 @@ class Project(db.Model):
     description = Column(String)
     captain_id = Column(Integer, ForeignKey(Student.aid))
 
-    def __init__(self, pid, assignment_type, crn, start_date, end_date, title, description, captain_id):
-        self.pid = pid
+    def __init__(self, assignment_type, crn, start_date, end_date, title, description, captain_id):
         self.assignment_type = assignment_type
         self.crn = crn
         self.start_date = start_date
@@ -79,7 +76,7 @@ class Project(db.Model):
 
 class Team(db.Model):
     pid = Column(Integer, ForeignKey(Project.pid), primary_key=True)
-    aid = Column(Integer, ForeignKey(Student.aid))
+    aid = Column(Integer, ForeignKey(Student.aid), primary_key=True)
 
     def __init__(self, pid, aid):
         self.pid = pid
