@@ -5,4 +5,4 @@ __pycache__/
 
 instance/
 
-forum_raw.db
+forum/db_config.py

@@ -30,5 +30,4 @@ def index():
                        request.form['description'], start_date, end_date)
 
     projects = get_all_projects()
-    print(get())
     return render_template('index.html', projects=projects)
