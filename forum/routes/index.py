@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, flash
 from ..models.project import *
 
 
@@ -28,10 +28,21 @@ def index():
         end_date = datetime(end[0], end[1], end[2])
         cid = find_cid(request.form['course_subject'],
                        request.form['course_number'])
-        create_project(request.form['assignment_type'], cid, start_date, end_date,
-                       request.form['title'], request.form['description'], session.get('aid'))
-        # create_project(request.form['assignment_type'], 1, datetime(2022, 1, 1), datetime(2022, 12, 31),
-        #                request.form['title'], request.form['description'], 1)
+        if len(cid) != 1:
+            flash('Invalid course')
+            projects = get_all_projects()
+            return render_template('index.html', projects=projects, title=request.form['title'],
+                                   course_subject=request.form['course_subject'],
+                                   course_number=request.form['course_number'],
+                                   assignment_type=request.form['assignment_type'],
+                                   start_date=request.form['start_date'],
+                                   end_date=request.form['end_date'],
+                                   description=request.form['description']
+                                   )
+        else:
+            create_project(request.form['assignment_type'], cid[0][0], start_date, end_date,
+                           request.form['title'], request.form['description'], session.get('user_id'))
 
     projects = get_all_projects()
+    # print(projects[0][0].__dict__)
     return render_template('index.html', projects=projects)

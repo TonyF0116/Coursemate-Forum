@@ -11,24 +11,19 @@ class Student(db.Model):
     year = Column(Integer)
     preferred_work_time = Column(Integer)
 
-    def __init__(self, displayed_name, first_name, last_name, major, year, preferred_work_time):
+    def __init__(self, displayed_name):
         self.displayed_name = displayed_name
-        self.first_name = first_name
-        self.last_name = last_name
-        self.major = major
-        self.year = year
-        self.preferred_work_time = preferred_work_time
 
 
 class Account(db.Model):
-    aid = Column(String, ForeignKey(Student.aid), primary_key=True)
+    aid = Column(Integer, ForeignKey(Student.aid), primary_key=True)
     username = Column(String)
-    credential = Column(String)
+    password = Column(String)
 
-    def __init__(self, aid, username, credential):
+    def __init__(self, aid, username, password):
         self.aid = aid
         self.username = username
-        self.credential = credential
+        self.password = password
 
 
 class Course(db.Model):

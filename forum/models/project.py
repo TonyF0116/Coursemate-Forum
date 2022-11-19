@@ -4,7 +4,7 @@ from sqlalchemy import *
 
 
 def get_all_projects():
-    return Project.query.all()
+    return db.session.query(Project, Course).join(Course).order_by(Project.pid.desc()).all()
 
 
 def create_project(assignment_type, cid, start_date, end_date, title, description, captain_id):
@@ -16,4 +16,4 @@ def create_project(assignment_type, cid, start_date, end_date, title, descriptio
 
 def find_cid(course_subject, course_number):
     cur_semester = 'FA2022'
-    return Course.query.filter_by(term=cur_semester, course_subject=course_subject, course_number=course_number).all()
+    return Course.query.filter_by(term=cur_semester, course_subject=course_subject, course_number=course_number).with_entities(Course.cid).all()

@@ -9,42 +9,57 @@
 </head>
 
 <body>
+
+    <div>
+        {% if session.get('user_id') %}
+        <li><span>{{ 'Welcome, '+session.get('user_id') }}</span>
+        <li><a href="{{ url_for('user.logout') }}">Log Out</a>
+            <br><br>
+            <p>Create New Project:</p>
+            <form method="post">
+                <label for="title">Title: </label>
+                <input name="title" id="title" value="{{title}}">
+                <br>
+                <label for="title">Course subject (abbreviated): </label>
+                <input name="course_subject" id="course_subject" value="{{course_subject}}">
+                <br>
+                <label for="title">Course number: </label>
+                <input name="course_number" id="course_number" value="{{course_number}}">
+                <br>
+                <label for="title">Assignment type: </label>
+                <input name="assignment_type" id="assignment_type" value="{{assignment_type}}">
+                <br>
+                <label for="title">Project start date: </label>
+                <input name="start_date" id="start_date" placeholder="YYYY-MM-DD" value="{{start_date}}">
+                <br>
+                <label for="title">Project end date: </label>
+                <input name="end_date" id="end_date" placeholder="YYYY-MM-DD" value="{{end_date}}">
+                <br>
+                <label for="title">Description: </label>
+                <input name="description" id="description" value="{{description}}">
+                <br>
+                <input type="submit" value="Post">
+            </form>
+            {% for message in get_flashed_messages() %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            <hr>
+            {% else %}
+        <li><a href="{{ url_for('user.register') }}">Register</a>
+        <li><a href="{{ url_for('user.login') }}">Log In</a>
+            {% endif %}
+    </div>
+
+
     {% for project in projects %}
-    <p>Project title: {{project.title}}</p>
-    <p>Project type: {{project.assignment_type}}</p>
-    <p>From course: {{project.cid}}</p>
-    <p>Project group leader: {{project.captain_id}}</p>
-    <p>Project description: {{project.description}}</p>
-    <p>Project time: from {{project.start_date}} to {{project.end_date}}</p>
+    <p>Project title: {{project[0].title}}</p>
+    <p>Project type: {{project[0].assignment_type}}</p>
+    <p>From course: {{project[1].course_subject}} {{project[1].course_number}}</p>
+    <p>Project group leader: {{project[0].captain_id}}</p>
+    <p>Project description: {{project[0].description}}</p>
+    <p>Project time: from {{project[0].start_date}} to {{project[0].end_date}}</p>
     <hr>
     {% endfor %}
-
-    <br><br>
-
-    <form method="post">
-        <label for="title">Title: </label>
-        <input name="title" id="title">
-        <br>
-        <label for="title">Course subject (abbreviated): </label>
-        <input name="course_subject" id="course_subject">
-        <br>
-        <label for="title">Course number: </label>
-        <input name="course_number" id="course_number">
-        <br>
-        <label for="title">Assignment type: </label>
-        <input name="assignment_type" id="assignment_type">
-        <br>
-        <label for="title">Project start date: </label>
-        <input name="start_date" id="start_date" placeholder="YYYY-MM-DD">
-        <br>
-        <label for="title">Project end date: </label>
-        <input name="end_date" id="end_date" placeholder="YYYY-MM-DD">
-        <br>
-        <label for="title">Description: </label>
-        <input name="description" id="description">
-        <br>
-        <input type="submit" value="Post">
-    </form>
 
 </body>
 

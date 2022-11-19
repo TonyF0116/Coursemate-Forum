@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+</head>
+
+<body>
+  <a class="action" href="{{ url_for('index.index') }}">Back to index page</a>
+
+  <br><br><br>
+
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password">
+
+    <input type="submit" value="Register" id="submit">
+  </form>
+
+  {% for message in get_flashed_messages() %}
+  <p>{{ message }}</p>
+  {% endfor %}
+
+
+  <br><br><br><br><br>
+  <a href="login" class="login-navlink1">
+    <span class="login-text3">Login</span>
+    <br />
+  </a>
+
+</body>
+
+</html>
